@@ -231,6 +231,19 @@ export class IFrameEthereumProvider extends EventEmitter<
     return promise;
   }
 
+  public async request<TParams, TResult, TErrorData>({
+    method,
+    params,
+  }: {
+    method: string;
+    params?: TParams;
+  }): Promise<
+    | JsonRpcSucessfulResponseMessage<TResult>
+    | JsonRpcErrorResponseMessage<TErrorData>
+  > {
+    return this.send(method, params);
+  }
+
   /**
    * Send the JSON RPC and return the result.
    * @param method method to send to the parent provider

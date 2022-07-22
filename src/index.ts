@@ -100,6 +100,7 @@ function getUniqueId(): number {
 
 export type IFrameEthereumProviderEventTypes =
   | 'connect'
+  | 'disconnect'
   | 'close'
   | 'notification'
   | 'chainChanged'
@@ -111,6 +112,8 @@ export type IFrameEthereumProviderEventTypes =
  */
 export interface IFrameEthereumProvider {
   on(event: 'connect', handler: () => void): this;
+
+  on(event: 'disconnect', handler: () => void): this;
 
   on(event: 'close', handler: (code: number, reason: string) => void): this;
 
@@ -351,6 +354,10 @@ export class IFrameEthereumProvider extends EventEmitter<
           this.emitConnect();
           break;
 
+        case 'disconnect':
+          this.emitDisconnect();
+          break;
+
         case 'close':
           this.emitClose(message.params[0], message.params[1]);
           break;
@@ -381,6 +388,11 @@ export class IFrameEthereumProvider extends EventEmitter<
       this.enabled = Promise.resolve([]);
     }
     this.emit('connect');
+  }
+
+  private emitDisconnect() {
+    this.enabled = null;
+    this.emit('disconnect');
   }
 
   private emitClose(code: number, reason: string) {

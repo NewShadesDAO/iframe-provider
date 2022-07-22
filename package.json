@@ -1,5 +1,5 @@
 {
-  "name": "@ethvault/iframe-provider",
+  "name": "@newshades/iframe-provider",
   "version": "0.1.10",
   "main": "dist/index.js",
   "module": "dist/ethereumprovider.esm.js",
@@ -16,7 +16,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ethvault/iframe-provider"
+    "url": "https://github.com/NewShadesDAO/iframe-provider.git"
   },
   "peerDependencies": {},
   "husky": {
